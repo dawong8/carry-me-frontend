@@ -1,7 +1,6 @@
 
 
 export const register = async(dispatch, formData) => {
-    console.log(formData)
     const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users`, {
         method: "POST",
         body: JSON.stringify(formData),

@@ -16,7 +16,7 @@ const HomePage = (props) => {
 
 
 			
-			{ props.loggedIn === true && props.user !== null && props.user !== "Email/Password Incorrect" ? localStorage.setItem('user', props.user) : console.log('not storing in local storage', "localstorage user", localStorage.getItem('user'), 'what is props.login right now', props.loggedIn)}
+			{ props.loggedIn === true && props.user !== null && props.user !== "Email/Password Incorrect" ? localStorage.setItem('user', props.user.id) : console.log('not storing in local storage', "localstorage user", localStorage.getItem('user'), 'what is props.login right now', props.loggedIn)}
 
 			<NavBar loggedIn={props.loggedIn}  />  
 

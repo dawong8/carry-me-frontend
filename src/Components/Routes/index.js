@@ -14,7 +14,7 @@ const AllRoutes = () => {
 		<Switch>
       <Route exact path = '/' component= { HomePage } />
       <Route exact path = '/edit' component = { EditProfile} />
-
+      <Route exact path = '/what' component = { WhatGame } />
     </Switch>
 		)
 };
