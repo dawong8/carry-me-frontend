@@ -7,6 +7,7 @@ const initialState = {
         'description': '',
         'fortnite': '',
         'fortnite_platform': '',
+        'accountId': '',
     }, 
     fromWhere: '',
     error: ''
@@ -54,6 +55,7 @@ const authReducer = (state = initialState, action) => {
                 'description': '',
                 'fortnite': '',
                 'fortnite_platform': '',
+                'accountId': ''
             }
           }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -7,16 +7,31 @@ import { logout } from '../../ReduxStuff/actions/authActions';
 
 import AuthGateway from '../AuthGateway';
 
+class Navbar extends Component {
+	constructor() {
+		super();
+		this.state = {
+			modal: false
+		}
+	}
 
-const Navbar = (props) => {
-
-	return (
+	open = () =>{
+		this.setState({
+			modal: !this.state.modal
+		});
+	}
+	render() {
+		return (
 		<div className="navbar">
 			<Link to ="/"> Home </Link>
+			{this.props.error}
+			{this.props.loggedIn === true ? <button onClick={this.props.logout}> logout </button> : <button onClick={this.open}> Login </button> }
 
-			{props.loggedIn === true ? <button onClick={props.logout}> logout </button> : <AuthGateway />}
+			{this.state.modal? <AuthGateway /> : null}
 		</div>
 		)
+	}
+	
 };
 
 
