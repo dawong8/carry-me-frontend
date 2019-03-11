@@ -5,12 +5,8 @@ const initialState = {
         'username': '', 
         'email': '', 
         'description': '',
-        'apex': '',
-        'apex_platform': '',
-        'overwatch': '',
-        'overwatch_platform': '',
         'fortnite': '',
-        'fortnite_overwatch': '',
+        'fortnite_platform': '',
     }, 
     fromWhere: '',
     error: ''
@@ -56,12 +52,8 @@ const authReducer = (state = initialState, action) => {
                 'username': '', 
                 'email': '', 
                 'description': '',
-                'apex': '',
-                'apex_platform': '',
-                'overwatch': '',
-                'overwatch_platform': '',
                 'fortnite': '',
-                'fortnite_overwatch': '',
+                'fortnite_platform': '',
             }
           }
 

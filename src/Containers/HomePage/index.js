@@ -5,12 +5,13 @@ import EditProfile from '../EditProfile';
 
 import { connect } from 'react-redux';
 
+
 // passing user prop to navbar bc its not rerendering
 // 
 const HomePage = (props) => {
 
 	return (
-		<div>
+		<div className="container">
 
 			<h1> {props.error !== '' ? props.error : null}</h1>
 
@@ -27,11 +28,12 @@ const HomePage = (props) => {
 				
 			:
 			<div>
-				<h1> Logo </h1>
 
-				<h1> Subtitle </h1>
+				<img src="/Carry_me_2.png" alt="logo" />
 
-				<SearchBar/>
+				<h1> subline </h1>
+
+				
 			</div>
 			}
 
