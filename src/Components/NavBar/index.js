@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -11,7 +11,8 @@ class Navbar extends Component {
 	constructor() {
 		super();
 		this.state = {
-			modal: false
+			modal: false,
+			logout: false
 		}
 	}
 
@@ -20,14 +21,24 @@ class Navbar extends Component {
 			modal: !this.state.modal
 		});
 	}
+
+	getLogout = () => {
+		this.props.logout();
+		this.setState({
+			logout: true
+		})
+	}
+
 	render() {
 		return (
 		<div className="navbar">
 			<Link to ="/"> Home </Link>
 			{this.props.error}
-			{this.props.loggedIn === true ? <button onClick={this.props.logout}> logout </button> : <button onClick={this.open}> Login </button> }
+			{this.props.loggedIn === true ? <button onClick={this.getLogout}> logout </button> : <button onClick={this.open}> Login </button> }
 
 			{this.state.modal? <AuthGateway /> : null}
+
+			{this.state.logout ? <Redirect to="/" /> : null}
 		</div>
 		)
 	}

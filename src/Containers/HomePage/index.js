@@ -1,7 +1,5 @@
 import React from 'react'; 
-import SearchBar from '../../Components/SearchBar'
 import NavBar from '../../Components/NavBar';
-import EditProfile from '../EditProfile';
 
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -27,7 +25,7 @@ const HomePage = (props) => {
 			
 			<div>
 
-				<img src="/Carry_me_2.png" alt="logo" />
+				<img src="/cover.png" alt="logo" />
 
 				<h1> subline </h1>
 

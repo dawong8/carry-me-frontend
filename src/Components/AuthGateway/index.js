@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import { connect } from 'react-redux';
 import { register, login } from '../../ReduxStuff/actions/authActions';
-import { Redirect } from 'react-router-dom';
 
 class AuthGateway extends Component{
     constructor(){
