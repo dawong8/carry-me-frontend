@@ -23,15 +23,12 @@ const HomePage = (props) => {
 			
 				
 			
-			<div>
+			
 
-				<img src="/cover.png" alt="logo" />
-
-				<h1> subline </h1>
-
+			<img src="/cover.png" alt="logo" />
 				
-			</div>
-			{ props.loggedIn && props.error === "" ? <Redirect to="/swipe" /> : <p> something's wrong </p>}
+			
+			{ props.loggedIn && props.error === "" ? <Redirect to="/swipe" /> : <p> Matchmaking made easy. </p>}
 
 
 		</div>
