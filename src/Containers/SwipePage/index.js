@@ -13,7 +13,8 @@ class SwipePage extends Component {
 			allUsers: [], 
 			currentRelations: [],
 			matched: false,
-
+			other_person: '', // id of the other person you matched with 
+			chatroom_id: '',
 			
 		}
 	}
@@ -83,42 +84,53 @@ class SwipePage extends Component {
 		}
 	}
 
-	checkIfMatch = async (other_person_id) => {
-		console.log('checkIfMatch is getting called')
-		try {
-			console.log('inside the try loop')
+	// checkIfMatch = async (other_person_id) => {
+	// 	console.log('checkIfMatch is getting called')
+	// 	try {
+	// 		console.log('inside the try loop')
 
-			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/relationship/${other_person_id}`);
-			console.log('we have a response!')
+	// 		const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/relationship/${other_person_id}`);
+	// 		console.log('we have a response!')
 
-			const parsedResponse = await response.json(); 
+	// 		const parsedResponse = await response.json(); 
 
-			// pasedResponse is an array of relationship objects 
+	// 		// pasedResponse is an array of relationship objects 
 
-			console.log('other person relationship', parsedResponse);
+	// 		console.log('other person relationship', parsedResponse);
 
-			for (let a = 0; a < parsedResponse.length; a++) {
+	// 		for (let a = 0; a < parsedResponse.length; a++) {
 
-				console.log("their other person", parsedResponse[a].other_person, "my id", localStorage.getItem('user'), "their relation to you", parsedResponse[a].like);
-				if (parsedResponse[a].other_person === localStorage.getItem('user') && parsedResponse[a].like) {
-					return true; 
-				}
-			}
-			return false;
-		} catch (err) {
-			return err; 
-		}
-	} 
+	// 			console.log("their other person", parsedResponse[a].other_person, "my id", localStorage.getItem('user'), "their relation to you", parsedResponse[a].like);
+	// 			if (parsedResponse[a].other_person === localStorage.getItem('user') && parsedResponse[a].like) {
+	// 				return true; 
+	// 			}
+	// 		}
+	// 		return false;
+	// 	} catch (err) {
+	// 		return err; 
+	// 	}
+	// } 
 
+	generateID = () => {
+		  let text = "";
+		  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		  for (let i = 0; i < 5; i++)
+		    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		  return text;
+	}
 	swipe = async (action, randInt) => { // action -- true: like, false: pass
 		try {
+			let chat = this.generateID();
 			let relation = { 
 				owner_id: localStorage.getItem('user'),
 				other_person: this.state.allUsers[randInt].id,
-				like: action
+				like: action, 
+				chatroom_id: chat
 			}
 
-
+			// we are creating a brand new relationship 
 			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/relationship`, {
 		        method: "POST",
 		        body: JSON.stringify(relation),
@@ -142,15 +154,30 @@ class SwipePage extends Component {
 		    // after we swiped successfully and created a relationship, we want to check if there is a match 
 
 		    if (action) { //check only if you like them
-		    	console.log('checking if there is match now!')
-		    	let c = this.checkIfMatch(this.state.allUsers[randInt].id);
-		    	console.log('what is c', c);
-		    	if (c === true) {
-			    	this.setState({
-			    		matched: true
-		    		});
-		    	} else {
-		    		console.log('there is no match')
+		    	try {
+		    		const r = await fetch(`${process.env.REACT_APP_API}/api/v1/users/relationship/${localStorage.getItem('user')}`, {
+				        method: "POST",
+				        body: JSON.stringify(relation),
+				        credentials: 'include',
+				        headers: {
+				            'Content-Type': 'application/json'
+				        }
+				    });
+
+
+				    const p = await r.json();
+				    console.log('matched???' , p);
+
+				    if (p === "Found") {
+				    	this.setState({
+				    		matched: true,
+				    		other_person: relation.other_person,
+				    		chatroom_id: relation.chatroom_id,
+
+				    	})
+				    }
+		    	} catch (err) {
+		    		return err; 
 		    	}
 
 
@@ -179,7 +206,7 @@ class SwipePage extends Component {
 						<button onClick={this.swipe.bind(null, false, randInt)}> Pass</button>
 					</div>
 					: <p> No more users available. Sorry! </p>} 
-				{ this.state.matched ? <Matched /> : null}
+				{ this.state.matched ? <Matched other={this.state.other_person} chatroom_id={this.state.chatroom_id} /> : null}
 
 			</div>
 

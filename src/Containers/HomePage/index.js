@@ -1,38 +1,84 @@
-import React from 'react'; 
+import React, {Component} from 'react'; 
 import NavBar from '../../Components/NavBar';
+import FortniteShop from '../FortniteShop';
 
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 
 // passing user prop to navbar bc its not rerendering
-// 
-const HomePage = (props) => {
+class HomePage extends Component {
 
-	return (
-		<div className="container">
+	constructor() {
+		super(); 
+		this.state={
+			shopbuttontext: "Daily Items",
+			missionbuttontext: "Missions",
+			hide: "hide", 
+			mainPageColumn: "column-12",
+			buttonPosition: "main-buttons",
+		}
+	}
+
+	openShop = () => {
+		if (this.state.shopbuttontext === "Daily Items") {
+			this.setState({
+				shopbuttontext: "Close Shop",
+				hide: "",
+				mainPageColumn: "column-6",
+				buttonPosition: "",
+			})
+		} else if (this.state.shopbuttontext === "Close Shop") {
+			this.setState({
+				shopbuttontext: "Daily Items",
+				hide: "hide",
+				mainPageColumn: "column-12",
+				buttonPosition: "main-buttons"
+			})
+		}
+	}
+
+	openMission = () => {
+
+	}
+
+	render() {
+		return (
+			<div className="container">
 
 
 
-			
-			{ props.loggedIn === true && props.user !== null && props.user !== "Email/Password Incorrect" ? localStorage.setItem('user', props.user.id) : console.log('not storing in local storage', "localstorage user", localStorage.getItem('user'), 'what is props.login right now', props.loggedIn)}
-
-			<NavBar loggedIn={props.loggedIn}  error={props.error} />  
-
-
-			
 				
-			
-			
+				{ this.props.loggedIn === true && this.props.user !== null && this.props.user !== "Email/Password Incorrect" ? localStorage.setItem('user', this.props.user.id) : null}
 
-			<img src="/cover.png" alt="logo" />
+				<NavBar loggedIn={this.props.loggedIn}  error={this.props.error} />  
+
+				<button className={"daily-items " + this.state.buttonPosition} onClick={this.openShop}> {this.state.shopbuttontext} </button>
+				<button className={"daily-missions " + this.state.buttonPosition} onClick={this.openMission}> {this.state.missionbuttontext} </button>
+
+				<div className="row">
+					<div className={"column " + this.state.mainPageColumn}> 
+						<img src="/cover.png" alt="logo" />
+					
 				
-			
-			{ props.loggedIn && props.error === "" ? <Redirect to="/swipe" /> : <p> Matchmaking made easy. </p>}
+						{ this.props.loggedIn && this.props.error === "" ? <Redirect to="/swipe" /> : <p className="title"> Find your squad. </p>}
+					</div>
+
+					<div className={"column column-6 " + this.state.hide  }>
+						<FortniteShop />
+					</div>
+
+				</div> 
+				
+
+				
 
 
-		</div>
+
+			</div>
 		)
+	}
+	
 	
 }
 

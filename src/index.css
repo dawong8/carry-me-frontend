@@ -10,7 +10,7 @@
   font-family: myFirstFont;
   color: lightcoral;
   letter-spacing: 1px;
-  font-size: 100px;
+  font-size: 50px;
   /*font-size: 100px;*/
 }
 
@@ -28,9 +28,85 @@ body {
 }
 
 
+
+.row, .column {
+  box-sizing: border-box;
+
+}
+
+.column {
+  float: left;
+  text-align: center;
+  overflow: hidden;
+}
+
+.column-1 { width: 8.33%; }
+.column-2 { width: 16.66%; }
+.column-3 { width: 25%; }
+.column-4 { width: 33.33%; }
+.column-5 { width: 41.66%; }
+.column-6 { width: 50%; }
+.column-7 { width: 58.33%; }
+.column-8 { width: 66.66%; }
+.column-9 { width: 75%; }
+.column-10 { width: 83.33%; }
+.column-11 { width: 91.66%; }
+.column-12 { width: 100%; }
+
+.title{
+  animation: changecolor 5s ease-in-out infinite alternate;
+}
+
+@keyframes changecolor {
+  from {color: lightcoral;}
+  to {color: purple;}
+}
+
+button {
+    outline: none;
+}
+
+
+.daily-items, .daily-missions{
+  position: fixed; 
+  margin-right: 5px;
+  padding: 10px;
+  top: 10%;
+  right: 50%;
+  border: 2px white solid;
+  border-radius: 45px;
+  font-size: 25px;
+  color: #4d648d;
+  background: red;
+}
+
+.daily-missions {
+  top: 18%;
+
+}
+
+.main-buttons {
+  right: 0px;
+  background: #fad9c1;
+
+}
+
+.daily-items:hover {
+  color: #fad9c1;
+  background: #4d648d;
+  cursor: pointer;
+}
+
+
+.hide {
+  display: none;
+}
+/* balloon stuff below*/
+
+
 .balloon {
   display:inline-block;
-   width:120px;
+  width:120px;
   height:145px;
   background:hsl(215,50%,65%);
   border-radius:80%;
@@ -39,13 +115,14 @@ body {
   margin:20px 30px;
   transition:transform 0.5s ease;
   z-index:10;
-  animation:balloons 4s ease-in-out infinite;
+  animation:balloons 7s ease-in-out infinite;
   transform-origin:bottom center;
 }
 
 @keyframes balloons {
-  0%,100%{ transform:translateY(0) rotate(-4deg); }
-  50%{ transform:translateY(-25px) rotate(4deg); }
+  0%{ transform:translateY(0) rotate(0deg); }
+  100%{ transform:translateY(-900px) rotate(12deg); }
+
 }
 
 

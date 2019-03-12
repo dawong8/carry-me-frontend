@@ -12,7 +12,6 @@ class Navbar extends Component {
 		super();
 		this.state = {
 			modal: false,
-			logout: false
 		}
 	}
 
@@ -27,6 +26,7 @@ class Navbar extends Component {
 		this.setState({
 			logout: true
 		})
+		console.log('logout clicked')
 	}
 
 	render() {
@@ -34,11 +34,21 @@ class Navbar extends Component {
 		<div className="navbar">
 			<Link to ="/"> Home </Link>
 			{this.props.error}
-			{this.props.loggedIn === true ? <button onClick={this.getLogout}> logout </button> : <button onClick={this.open}> Login </button> }
+			{this.props.loggedIn === true ? 
+				<div>
+					<button onClick={this.getLogout}> logout </button> 
+					<p> view my matches, messages </p>
+
+				</div>
+				: 
+				<span>
+					<button onClick={this.open}> Login </button>
+					<Redirect to="/" />
+				</span>
+			 }
 
 			{this.state.modal? <AuthGateway /> : null}
 
-			{this.state.logout ? <Redirect to="/" /> : null}
 		</div>
 		)
 	}

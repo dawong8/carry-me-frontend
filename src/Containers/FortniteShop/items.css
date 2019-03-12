@@ -1,0 +1,27 @@
+.items {
+	width: 98%;
+	height: 100%;
+	/*-webkit-filter: saturate(2);
+  	filter: saturate(2);*/
+  	border: white 1px solid;
+}
+
+.Fine {
+	/*background: #ffdfba;*/
+	background: radial-gradient(circle, #ffffba, orange);
+}
+.Handmade {
+	background: radial-gradient(circle, #baffc9, lightgreen)
+}
+
+.Quality {
+	background: radial-gradient(circle, #f1cbff, violet)
+}
+
+.Sturdy {
+	background: radial-gradient(circle, #bae1ff, #AEEEEE )
+}
+
+.items:hover{
+	filter: drop-shadow(16px 16px 20px red) invert(75%);
+}
