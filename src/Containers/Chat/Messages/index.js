@@ -1,12 +1,24 @@
 import React from 'react'; 
+import './message.css';
+
 
 const Messages = (props) => {
-	return (
-		<div> 
+	const allMsg = props.allMessages.map( (item, index) => {
+		return (
+			<div key={index}>
+				{ item.sender === localStorage.getItem('user') ? <p className="my-message"> {item.message} </p> : <p className="your-message"> {item.message} </p>} 
+			</div>
 
-			i am a message
+			)
+	})
+
+	return (
+
+		<div> 
+			{allMsg}
 		</div>
 		)
+			
 };
 
 export default Messages;

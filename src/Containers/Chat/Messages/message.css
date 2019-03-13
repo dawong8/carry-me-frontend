@@ -1,0 +1,10 @@
+.my-message {
+	background: lightblue; 
+	border-top: 0.5px solid white;
+}
+
+.your-message {
+	background: grey;
+	border-top: 0.5px solid white;
+
+}

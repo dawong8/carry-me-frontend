@@ -1,0 +1,48 @@
+.contains-card {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.usercard-container {
+	margin: 1% auto;
+
+	background: white;
+	border: 10px lightyellow solid;
+	border-radius: 15px;
+	text-align: center;
+
+
+	overflow: hidden;
+}
+
+.toxicity-rating {
+	/* this is for the image*/
+
+	width: 10%;
+}
+
+.toxic {
+	color: #897C87;
+}
+
+.description, .fortnite-stats{
+	font-size: 20px;
+}
+
+.fortnite-stats {
+	color: #DB93A5;
+}
+
+.username-title {
+	color: #40393E;
+}
+
+.username-title:hover {
+	color: pink;
+	cursor: pointer;
+
+}
+
+.invisible {
+	visibility: hidden;
+}

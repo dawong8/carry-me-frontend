@@ -1,6 +1,8 @@
 import React from 'react';
 import ChatContainer from '../Chat/ChatContainer';
 
+import './matched.css';
+
 const Matched = (props) => {
 
 /*
@@ -11,10 +13,11 @@ const Matched = (props) => {
 
 */
 	return (
-		<div> 
-			<h1> There is a match. (i'd like this to be a modal) </h1>
+		<div className={"matched-modal " + props.hide} > 
+			<h1> Matched! </h1>
 
 			<ChatContainer other={props.other} chatroom_id={props.chatroom_id} />
+			<button onClick={props.closeModal}> Meet Others</button> 
 		</div>
 		)
 }

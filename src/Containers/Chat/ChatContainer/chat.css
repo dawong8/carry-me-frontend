@@ -1,0 +1,7 @@
+.message-history {
+	overflow: scroll;
+
+	height: 300px;
+	width: 100%;
+	border: 2px white solid;
+}

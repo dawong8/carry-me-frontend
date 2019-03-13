@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import UserCard from '../../Components/UserCard';
 import Matched from '../Matched';
 
+import './swipe.css';
+
 class SwipePage extends Component {
 
 	constructor() {
@@ -15,18 +17,27 @@ class SwipePage extends Component {
 			matched: false,
 			other_person: '', // id of the other person you matched with 
 			chatroom_id: '',
-			
+			matchModal: ""
 		}
+
+		this._isMounted = false;
+
 	}
 
 	componentDidMount() {
-		this.getUsers();
 
-		this.filterUsers();
+		this._isMounted = true;
+
+		this._isMounted && this.getUsers();
+
+		this._isMounted && this.filterUsers();
 		
-
 	
 	}
+	componentWillUnmount() {
+	   this._isMounted = false;
+	}
+
 
 	getUsers = async () => {
 		try {
@@ -34,7 +45,7 @@ class SwipePage extends Component {
 			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/${localStorage.getItem("user")}`); 
 
 			const parsedResponse = await response.json();
-			this.setState({
+			this._isMounted && this.setState({
 				allUsers: parsedResponse
 			})
 		} catch (err) {
@@ -74,7 +85,7 @@ class SwipePage extends Component {
 
 			// console.log('newArray', newArray);
 
-			this.setState({
+			this._isMounted && this.setState({
 				allUsers: newArray, 
 				currentRelations: parsedResponse
 			})
@@ -146,7 +157,7 @@ class SwipePage extends Component {
 
 		    let tempArray = this.state.allUsers.filter( item => item !== this.state.allUsers[randInt]); 
 
-		    this.setState({
+		    this._isMounted && this.setState({
 		    	allUsers: tempArray, 
 		    	currentRelations: [ ...this.state.currentRelations, parsedResponse]
 		    })
@@ -191,22 +202,43 @@ class SwipePage extends Component {
 
 	}
 
+	closeModal = () => {
+		this.setState({
+			matchModal: "hide"
+		});
+	}
+
 	render() {
 
-		// console.log('allUser array', this.state.allUsers)
+		console.log('allUser array', this.state.allUsers)
 		const randInt = Math.floor(Math.random() * this.state.allUsers.length); // generates a random int everytime render() is called
 		return (
 			<div> 
 				<NavBar loggedIn={this.props.loggedIn} error={this.props.error} />
 
 				{this.state.allUsers.length !== 0 ? 
-					<div> 
-						<UserCard user={this.state.allUsers[randInt]} /> 
-						<button onClick={this.swipe.bind(null, true, randInt)}> Like</button>
-						<button onClick={this.swipe.bind(null, false, randInt)}> Pass</button>
+					<div className="row"> 
+						<div className="column column-4 invisible"> . </div>
+
+						<div className="column column-4"> 
+							<UserCard user={this.state.allUsers[randInt]} /> 
+
+							<button className="like-button" onClick={this.swipe.bind(null, true, randInt)}> Like</button>
+							<button className="pass-button" onClick={this.swipe.bind(null, false, randInt)}> Pass</button> 
+						</div>
 					</div>
-					: <p> No more users available. Sorry! </p>} 
-				{ this.state.matched ? <Matched other={this.state.other_person} chatroom_id={this.state.chatroom_id} /> : null}
+					: 
+					<div className="row"> 
+						<div className="column column-4 invisible"> . </div>
+						<p className="column column-4"> No more users available. Sorry! </p>
+					</div>
+					} 
+				{ this.state.matched ? 
+					<div>
+						<Matched other={this.state.other_person} chatroom_id={this.state.chatroom_id} closeModal={this.closeModal} hide={this.state.matchModal} /> 
+
+					</div>
+				: null}
 
 			</div>
 

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../ReduxStuff/actions/authActions';
 
 import AuthGateway from '../AuthGateway';
+import AllMessages from '../../Containers/Chat/AllMessages';
 
 import './navbar.css';
 
@@ -14,6 +15,8 @@ class Navbar extends Component {
 		super();
 		this.state = {
 			modal: false,
+			messages: false,
+			swipe: false, 
 		}
 	}
 
@@ -26,43 +29,74 @@ class Navbar extends Component {
 	getLogout = () => {
 		this.props.logout();
 		this.setState({
-			logout: true
+			logout: true // hmmm....?
 		})
 		console.log('logout clicked')
+	}
+
+	openSwipe = () => {
+		this.setState({
+			swipe: true
+		})
+	}
+
+	openMessages = () => {
+		this.setState({
+			messages: true
+		})
 	}
 
 	render() {
 
 		// search modal pops up when clicked "search"
+		
 
 		return (
 		<div className="navbar">
-			<Link className="links nav-items-text" to ="/"> Home </Link>
+			<Link className="links nav-items-text" to ="/"> Carry me </Link>
 			<span className="nav-items"> - </span>
-			{this.props.error}
-			{this.props.loggedIn === true ? 
-				<div>
-					<button className="log nav-items-text" onClick={this.getLogout}> logout </button> 
-					<p> view my matches, messages </p>
 
-				</div>
-				: 
+
+
+			
+
+			{localStorage.getItem('user') !== null ? 
 				<span>
-					<button className="log nav-items-text" onClick={this.open}> Login </button>
+
+					<Link className="links nav-items-text" to = "/swipe"> Swipe </Link>
 					<span className="nav-items"> - </span>
 
-					<span className="nav-items-text"> search </span> 
-					<Redirect to="/" />
+					<Link className="links nav-items-text" to = "/messages"> Messages </Link>
+					<span className="nav-items"> - </span>
+
+					<button className="log nav-items-text" onClick={this.getLogout}> logout </button> 
+
+
+				</span>
+				: 
+				<span>
+					{ this.state.modal ?  <button className="log nav-items-text close-login" onClick={this.open}> Close </button> : <button className="log nav-items-text" onClick={this.open}> Login </button>} 
+					<Redirect to="/"/>
 				</span>
 
 
 			 }
 
+
+
+
+
+
 			 <div className="hamburger"> 
 			 		&#9776;
 			 </div>
 
-			{this.state.modal? <AuthGateway /> : null}
+			{this.state.modal? 
+				<div className="login-modal"> 
+					<AuthGateway error={this.props.error} /> 
+
+				</div>
+				: null}
 
 		</div>
 		)

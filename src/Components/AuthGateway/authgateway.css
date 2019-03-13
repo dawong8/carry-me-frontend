@@ -1,0 +1,96 @@
+/*.login-form {
+	text-align: right;
+	margin-right: 10%;
+}*/
+
+.submit {
+	border: 5px white solid;
+	border-radius: 45px;
+	background: #F5F3E7;
+	font-size: 30px;
+	padding: 7px;
+	color: #897C87;
+
+}
+
+.submit:hover {
+	color: #DB93A5;
+	cursor: pointer;
+	background: #FFD9CF;
+}
+
+.new-user{
+	color: steelblue;
+	background: #F4CFDF;
+
+}
+
+
+input {
+	border: 2px white solid;
+	background: none;
+	color: #84A6D6;
+}
+
+.register-input {
+
+	width: 90%;
+}
+
+
+
+.register-title {
+	color: #beb4c5;
+	text-shadow: 1px 1px black;
+
+}
+
+.have-account {
+	color: #8C7386;
+}
+
+.have-account:hover {
+	color: lightcoral;
+	cursor: pointer;
+}
+
+.connect-button {
+	border-radius: 45px;
+	padding: 7px;
+	font-size: 20px;
+	background: #F9CAD7;
+
+}
+
+.connect-button:hover {
+	background: #84A6D6;
+	color: #F9CAD7;
+	text-shadow: 1px 1px black;
+
+}
+
+.connected {
+	color: pink;
+	text-shadow: 1px 1px black;
+
+}
+
+.error {
+	color: #cc3333;
+	text-shadow: 1px 1px black;
+	font-size: 25px;
+
+}
+
+
+
+@media only screen and (max-width: 930px) {
+
+	.register-col {
+		width: 100%;
+	}
+	.have-account {
+		font-size: 10px; /* something is wrong, still being cut off at the bottom ?? */
+	}
+
+}

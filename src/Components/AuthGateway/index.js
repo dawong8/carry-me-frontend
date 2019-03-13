@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { register, login } from '../../ReduxStuff/actions/authActions';
 
+import './authgateway.css';
+
 class AuthGateway extends Component{
     constructor(){
         super();
@@ -22,6 +24,7 @@ class AuthGateway extends Component{
             }, 
             readySubmit: false,
             err: "",
+            loginButton: true,
 
         }
     }
@@ -89,41 +92,68 @@ class AuthGateway extends Component{
             return err;
         }
     }
+
+    buttonClicked = () => {
+        this.setState({
+            loginButton: !this.state.loginButton
+        });
+    }
     render(){
         return(
             <div>
                 
-                <div>
-                    <form onSubmit={this.handleRegister}>
-                        <h5>REGISTER AS A NEW USER</h5>
-                        Nickname: <input type="text" name="username" onChange={this.handleRegisterInput} required/>
-                        email: <input type="text" name="email" onChange={this.handleRegisterInput} required/>
-                        password: <input type="text" name="password" onChange={this.handleRegisterInput} required />
-                        description/playstyle: <input type="text" name="description" onChange={this.handleRegisterInput} required />
-                          
-                        {this.state.readySubmit ? <input type="submit"/> : <span> Not ready! </span> }
-                    </form>
-                    <form onSubmit={this.connectFortnite}>
-                            <p> {this.state.err} </p>
-                            connect fortnite account <input type="text" name="fortnite" onChange={this.handleRegisterInput} required />
-                            <select name="fortnite_platform" onChange={this.handleRegisterInput}> 
-                                <option value="">Select Console</option> 
-                                <option value="pc">PC</option> 
-                                <option value="psn">playstation</option> 
-                                <option value="xbl">xbox</option> 
-                            </select>
-                            { this.state.readySubmit ?  <p> Connected! </p> : <input type="submit" value="Connect"/>}
-                    </form>  
 
-                    <br/> <br/>
-                    <form onSubmit={this.handleLogin}>
-                        <h5>LOGIN</h5>
-                        Email: <input type="text" name="email" onChange={this.handleLoginInput}/>
-                        password: <input type="text" name="password" onChange={this.handleLoginInput}/>
-                        <input type="submit"/>
-                    </form>
-                </div>
-                
+                {  this.state.loginButton ? 
+                    <div>
+                        <img src="/Carry_me_2.png" alt="logo" />
+                        <div className="error"> {this.props.error}</div>
+
+                        <form className="login-form" onSubmit={this.handleLogin}>
+                            
+                            <p> Email: </p><input type="email" name="email" onChange={this.handleLoginInput}/> 
+                            <p> Password:</p> <input type="password" name="password" onChange={this.handleLoginInput}/> 
+                            <div className="buttons-spacing"> 
+                                <input className="submit" type="submit"/> 
+                                <span className="submit new-user" onClick={this.buttonClicked}> New User?</span>
+
+                            </div>
+                        </form>
+                    </div>
+                :
+                    <div className="register-form row">
+                        <form className="column column-6 register-col" onSubmit={this.handleRegister}>
+                            <h5 className="register-title">Register</h5>
+                                    <p> Nickname: </p> <input className="register-input" type="text" name="username" onChange={this.handleRegisterInput} required/>
+                                    <p> email: </p> <input className="register-input" type="email" name="email" onChange={this.handleRegisterInput} required/>
+                                
+
+                                    <p> password: </p><input className="register-input" type="password" name="password" onChange={this.handleRegisterInput} required />
+                                    <p> About me/playstyle:</p> <input className="register-input" type="text" name="description" onChange={this.handleRegisterInput} required />
+                                
+                            {this.state.readySubmit ? <input className="submit" type="submit"/> : null }
+
+                        </form>
+                        <form className="column column-6 register-col" onSubmit={this.connectFortnite}>
+                                <p className="error"> {!this.state.readySubmit && this.state.err ? this.state.err: null} </p>
+                                connect fortnite account <input className="register-input" type="text" name="fortnite" onChange={this.handleRegisterInput} required />
+                                <select name="fortnite_platform" onChange={this.handleRegisterInput}> 
+                                    <option value="">Select Console</option> 
+                                    <option value="pc">PC</option> 
+                                    <option value="psn">Playstation</option> 
+                                    <option value="xbl">Xbox</option> 
+                                </select>
+
+                                { this.state.readySubmit ?  <p className="connected"> Connected! </p> : <div> <input className="connect-button" type="submit" value="Connect"/> </div>}
+                                <h5 className="have-account" onClick={this.buttonClicked}> Login instead? </h5>
+
+
+                        </form>  
+
+
+                    </div>
+                }
+
+
             </div>
         )
     }

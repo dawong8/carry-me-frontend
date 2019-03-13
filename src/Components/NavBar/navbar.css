@@ -4,6 +4,7 @@
 
 	background: #FEC7BC;
 	border-bottom: 1px solid #EEB8C5;
+	text-align: center;
 }
 
 .log {
@@ -20,6 +21,19 @@
 }
 
 
+.login-modal {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 99;
+	background: #CAE7E3;
+	overflow: scroll;
+}
+
+.close-login {
+	color: #C54B6C;
+}
+
 .hamburger {
 	display: none;
 }
@@ -35,3 +49,5 @@
   	margin-right: 10px;
   }
 }
+
+

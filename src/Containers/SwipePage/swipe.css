@@ -1,0 +1,27 @@
+.like-button {
+
+	background: #F9CAD7;
+}
+
+.like-button:hover {
+	color: #F9CAD7;
+	background: lightcoral;
+
+}
+
+.pass-button {
+	background: #B8E0F6;
+	color: steelblue;
+	
+
+}
+
+.pass-button:hover {
+	color: #B8E0F6;
+	background: steelblue;
+}
+
+.pass-button, .like-button {
+	border-radius: 45px;
+	padding: 2%;
+}

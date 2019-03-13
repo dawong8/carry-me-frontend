@@ -61,7 +61,7 @@ body {
 }
 
 @keyframes changecolor {
-  from {color: lightcoral;}
+  from {color: steelblue;}
   to {color: #EB96AA;}
 }
 

@@ -1,0 +1,10 @@
+.matched-modal {
+	margin: 0 auto;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background: pink;
+	text-align: center;
+	padding-top: 5%;
+
+}

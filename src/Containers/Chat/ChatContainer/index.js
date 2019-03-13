@@ -3,6 +3,8 @@ import database from '../../../firebase/firebase'
 
 import Messages from '../Messages';
 
+import './chat.css';
+
 class ChatContainer extends Component{
 
 /*
@@ -19,8 +21,10 @@ class ChatContainer extends Component{
 		super(); 
 		this.state = {
 			message: {
-				text: "",
-				date: null, 
+				chatroom_id: '', 
+				message: '', 
+				sender: '', // me 
+				receiver: '', // other person
 			}, 
 			allMessages: [],
 		};
@@ -28,65 +32,118 @@ class ChatContainer extends Component{
 	
 	componentDidMount() {
 		this.createChatroom();
+		this.getMessages();
 	}
 
 	createChatroom = () => {
-		database.ref(`chat:${this.props.chatroom_id}`).set({name: "jeff"})
-		.then(() => console.log('Data Written Successfully'))
-		.catch(error => console.log('Firebase Error: ', error))
+		// database.ref(`chat:${this.props.chatroom_id}`).set({test: "test"})
+		// .then(() => console.log('Data Written Successfully'))
+		// .catch(error => console.log('Firebase Error: ', error))
+
+		this.setState({
+			message: {
+				chatroom_id: this.props.chatroom_id,
+				sender: localStorage.getItem('user'),
+				receiver: this.props.other
+			}
+		})
 
 	}
 
+	// getMessages = () => {
+	// 	database.ref(`chat:${this.props.chatroom_id}`).on('value', (snapshot)=> {
+	// 		// snapshot is data from firease in its current state, what our db looks like in the moment 
+
+	// 		// console.log(snapshot);
+
+	// 		 const updatedUsers = [];
+
+	// 		 snapshot.forEach(childSnapshot => {	// this is a firebase for-each method, NOT js foreach, this will allow us to iterate through collecton
+	// 		 	updatedUsers.push( {
+	// 		 		id: childSnapshot.key, 
+	// 		 		...childSnapshot.val() // add any remianing key values pairs 
+	// 		 	})
+	// 		 })
+
+	// 		 this.setState({allMessages:[...updatedUsers]});
+
+	// 	});
+	// }
+
+
+	getMessages = async () => {
+		try {
+			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/chat/${localStorage.getItem('user')}`);
+
+			const p = await response.json();
+
+			this.setState({
+				allMessages: p
+			});
+		} catch (err) {
+			return err; 
+		}
+	}
 
 	handleInput = (e) => {
 		let temp = new Date();
 		this.setState({
 			message: {
+				...this.state.message,
 				[e.target.name]: e.target.value,
-				date: temp.toString(),
-
 			}
 		})
 	}
-	sendMessage = (e) => {
+	sendMessage = async (e) => {
 		e.preventDefault();
 
-		let temp = {
-			[`${this.state.message.date}`]: `${this.state.message.text}`
+
+		try {
+			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/chat/${this.props.chatroom_id}`, {
+                method: "POST",
+                body: JSON.stringify(this.state.message),
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const parsed = await response.json();
+
+            this.setState({
+            	allMessages: [...this.state.allMessages, parsed]
+            })
+		} catch (err) {
+			return err; 
 		}
-
-		console.log('message', temp);
-
-		database.ref(`chat:${this.props.chatroom_id}`).push(temp)
-		.then(() => console.log('Data Written Successfully'))
-		.catch(error => console.log('Firebase Error: ', error))
+		// database.ref(`chat:${this.props.chatroom_id}`).push(temp)
+		// .then(() => console.log('Data Written Successfully'))
+		// .catch(error => console.log('Firebase Error: ', error))
 
 		this.setState({
 			message: {
-				text: '',
-				date: null
+				...this.state.message, 
+				message: '',
 			}
 		});
 
 	}
 
-	updateChatHistory = () => {
-		// this is where we are gonna store the chat history into the array
-	}
 
 
 
 	render() {
-
+		console.log('almessages', this.state.allMessages)
 		return (
 
 			<div> 
 
-				i am chat ChatContainer
-
+				<div className="message-history"> 
+					<Messages allMessages={this.state.allMessages} />
+				</div>
 
 				<form onSubmit={this.sendMessage}> 
-					<input type="text" name="text" value={this.state.message.text} onChange={this.handleInput} />
+					<input type="text" name="message" value={this.state.message.message} onChange={this.handleInput} />
 					<input type="submit" value="send" /> 
 				</form> 
 			</div>

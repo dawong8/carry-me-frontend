@@ -9,18 +9,27 @@ class FortniteShop extends Component {
 		this.state={
 			items:[]
 		}
+
+		this._isMounted = false;
+
 	}
 	componentDidMount() {
-		this.getItems();
+		this._isMounted = true;
+
+		this._isMounted && this.getItems();
 	}
 
+
+	componentWillUnmount() {
+	   this._isMounted = false;
+	}
 	getItems = async () => {
 		try {
 			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/game_data/fortnite`); 
 
 			const parsedResponse = await response.json();
 
-			this.setState({
+			this._isMounted && this.setState({
 				items: parsedResponse
 			});
 

@@ -9,7 +9,7 @@ const ShowItems = (props) => {
 		if (index < 9) {
 			return (
 				
-					<div className="column column-4"> 
+					<div className="column column-4" key={index}> 
 						<img className={`items ${item.rarity}`} src={item.imageUrl} alt="item" />
 					</div>
 
