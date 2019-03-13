@@ -1,0 +1,37 @@
+.navbar {
+	/*position: fixed;*/
+	/*width: 100%;*/
+
+	background: #FEC7BC;
+	border-bottom: 1px solid #EEB8C5;
+}
+
+.log {
+	background: none;
+	border: none;
+}
+
+.links {
+	text-decoration: none;
+}
+
+.nav-items-text:hover {
+	color: white;
+}
+
+
+.hamburger {
+	display: none;
+}
+/* responsive starts at width 550 */
+
+@media only screen and (max-width: 675px) {
+  .nav-items, .nav-items-text {
+    display: none;
+  }
+  .hamburger {
+  	display: block;
+  	text-align: right;
+  	margin-right: 10px;
+  }
+}

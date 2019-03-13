@@ -7,6 +7,8 @@ import { logout } from '../../ReduxStuff/actions/authActions';
 
 import AuthGateway from '../AuthGateway';
 
+import './navbar.css';
+
 class Navbar extends Component {
 	constructor() {
 		super();
@@ -30,22 +32,35 @@ class Navbar extends Component {
 	}
 
 	render() {
+
+		// search modal pops up when clicked "search"
+
 		return (
 		<div className="navbar">
-			<Link to ="/"> Home </Link>
+			<Link className="links nav-items-text" to ="/"> Home </Link>
+			<span className="nav-items"> - </span>
 			{this.props.error}
 			{this.props.loggedIn === true ? 
 				<div>
-					<button onClick={this.getLogout}> logout </button> 
+					<button className="log nav-items-text" onClick={this.getLogout}> logout </button> 
 					<p> view my matches, messages </p>
 
 				</div>
 				: 
 				<span>
-					<button onClick={this.open}> Login </button>
+					<button className="log nav-items-text" onClick={this.open}> Login </button>
+					<span className="nav-items"> - </span>
+
+					<span className="nav-items-text"> search </span> 
 					<Redirect to="/" />
 				</span>
+
+
 			 }
+
+			 <div className="hamburger"> 
+			 		&#9776;
+			 </div>
 
 			{this.state.modal? <AuthGateway /> : null}
 

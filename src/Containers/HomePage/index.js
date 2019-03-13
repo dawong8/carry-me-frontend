@@ -64,7 +64,7 @@ class HomePage extends Component {
 						{ this.props.loggedIn && this.props.error === "" ? <Redirect to="/swipe" /> : <p className="title"> Find your squad. </p>}
 					</div>
 
-					<div className={"column column-6 " + this.state.hide  }>
+					<div className={"column column-6 shop-layout " + this.state.hide  }>
 						<FortniteShop />
 					</div>
 

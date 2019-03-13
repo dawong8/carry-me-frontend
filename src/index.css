@@ -14,9 +14,10 @@
   /*font-size: 100px;*/
 }
 
-.navbar {
-	background: lightblue;
+.shop-layout {
+  background: white
 }
+
 
 .container {
 	margin: 0 auto;
@@ -55,16 +56,21 @@ body {
 
 .title{
   animation: changecolor 5s ease-in-out infinite alternate;
+  text-shadow: 1px 1px black;
+
 }
 
 @keyframes changecolor {
   from {color: lightcoral;}
-  to {color: purple;}
+  to {color: #EB96AA;}
 }
+
 
 button {
     outline: none;
 }
+
+/* buttons */
 
 
 .daily-items, .daily-missions{
@@ -76,8 +82,10 @@ button {
   border: 2px white solid;
   border-radius: 45px;
   font-size: 25px;
-  color: #4d648d;
-  background: red;
+
+  text-shadow: 1px 1px black;
+  color: #f5bfd2;
+  background: #a1cdce;
 }
 
 .daily-missions {
@@ -87,13 +95,13 @@ button {
 
 .main-buttons {
   right: 0px;
-  background: #fad9c1;
+  background: #a1cdce;
 
 }
 
-.daily-items:hover {
-  color: #fad9c1;
-  background: #4d648d;
+.daily-items:hover, .daily-missions:hover {
+  color: #a1cdce;
+  background: #f5bfd2;
   cursor: pointer;
 }
 
@@ -159,3 +167,34 @@ button {
 
 .balloon:nth-child(5){ background:hsl(23,55%,57%); animation-duration:5s; }
 .balloon:nth-child(5):before { color:hsl(23,44%,46%);  }
+
+
+
+
+/* Responsive */
+
+
+@media only screen and (max-width: 650px) {
+  img {
+    width: 50%;
+  }
+  .shop-layout {
+    width: 100%;
+    position: fixed;
+  }
+  .daily-items, .daily-missions{
+    left: 0%;
+    top:1%;
+    font-size: 15px;
+  }
+  .daily-missions{
+    margin-left: 140px;
+  }
+
+}
+
+@media only screen and (max-width: 520px) {
+  
+}
+
+
