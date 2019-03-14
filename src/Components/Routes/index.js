@@ -2,6 +2,8 @@ import React from 'react';
 
 import HomePage from '../../Containers/HomePage';
 import SwipePage from '../../Containers/SwipePage';
+import ProfilePage from '../../Containers/ProfilePage';
+
 import AllMessages from '../../Containers/Chat/AllMessages';
 import { Route, Switch } from 'react-router-dom';
 
@@ -17,7 +19,8 @@ const AllRoutes = () => {
       <Route exact path = '/' component= { HomePage } />
       <Route exact path = '/swipe' component= { SwipePage } />
       <Route exact path = '/chat' component= { ChatContainer } />
-      <Route exact path = '/messages' component = { AllMessages} />
+      <Route exact path = '/messages' component = { AllMessages } />
+      <Route exact path = '/profile/:handle' component = { ProfilePage } />
 
     </Switch>
 		)

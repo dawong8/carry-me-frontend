@@ -1,4 +1,8 @@
 import React, {Component} from 'react'; 
+
+import {Link} from 'react-router-dom';
+
+
 import './usercard.css';
 
 class UserCard extends Component {
@@ -51,7 +55,7 @@ class UserCard extends Component {
 						<img src="/Carry_me.png" alt="logo" />
 
 
-						<h5 className="username-title"> {this.props.user.username} </h5>
+						<Link className="links" to={'/profile/'+ this.props.user.id} > <h5 className="username-title"> {this.props.user.username} </h5> </Link>
 						<span> {this.props.user.fortnite_platform} </span> 
 						{ this.state.fortniteAccountInfo ? 
 							<div> 

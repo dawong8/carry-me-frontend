@@ -1,0 +1,21 @@
+.side-contacts, .whole-history {
+	border: 5px solid lightyellow;
+	height: 100vh;
+	background: #e1f7d5;
+}
+
+.each-person {
+	border-bottom: 5px solid lightyellow;
+	font-size: 20px;
+	color: lightblue;
+	padding: 1%;
+}
+
+.each-person:hover {
+	background: lightpink;
+	cursor: pointer;
+}
+
+.whole-history{
+
+}

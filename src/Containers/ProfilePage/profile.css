@@ -1,0 +1,28 @@
+.profile-body, .review-form {
+	margin-top: 20px;
+}
+.descriptioning {
+	margin-bottom: 20px;
+	font-size: 20px;
+	color: lightgreen;
+	text-shadow: black 1px 1px;
+}
+
+.profile-title {
+	margin: 10px 0;
+	color: steelblue;
+}
+
+.review {
+	border: 5px solid white;
+	width: 70%;
+	margin: 0 15%;
+	padding: 5%;
+	background: lightblue;
+}
+
+.thank-you {
+	color: lightgreen;
+	text-shadow: black 1px 1px;
+
+}

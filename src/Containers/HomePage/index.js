@@ -54,14 +54,13 @@ class HomePage extends Component {
 				<NavBar loggedIn={this.props.loggedIn}  error={this.props.error} />  
 
 				<button className={"daily-items " + this.state.buttonPosition} onClick={this.openShop}> {this.state.shopbuttontext} </button>
-				<button className={"daily-missions " + this.state.buttonPosition} onClick={this.openMission}> {this.state.missionbuttontext} </button>
 
 				<div className="row">
 					<div className={"column " + this.state.mainPageColumn}> 
 						<img src="/cover.png" alt="logo" />
 					
 				
-						{ this.props.loggedIn && this.props.error === "" ? <Redirect to="/swipe" /> : <p className="title"> Find your squad. </p>}
+						{ this.props.loggedIn && this.props.error === "" ? <Redirect to="/swipe" /> : <p className="title">  Fortnite Social Networking. </p>}
 					</div>
 
 					<div className={"column column-6 shop-layout " + this.state.hide  }>

@@ -10,7 +10,7 @@ const ShowItems = (props) => {
 			return (
 				
 					<div className="column column-4" key={index}> 
-						<img className={`items ${item.rarity}`} src={item.imageUrl} alt="item" />
+						<img className={`items ${item.rarity}`} src={item.imageUrl} alt="item" onClick={props.show.bind(null, item)} />
 					</div>
 
 				)

@@ -32,7 +32,6 @@ class ChatContainer extends Component{
 	
 	componentDidMount() {
 		this.createChatroom();
-		this.getMessages();
 	}
 
 	createChatroom = () => {
@@ -40,13 +39,18 @@ class ChatContainer extends Component{
 		// .then(() => console.log('Data Written Successfully'))
 		// .catch(error => console.log('Firebase Error: ', error))
 
+
 		this.setState({
 			message: {
+				...this.state.message, 
 				chatroom_id: this.props.chatroom_id,
 				sender: localStorage.getItem('user'),
-				receiver: this.props.other
+				receiver: this.props.other,
+
 			}
-		})
+		});
+		this.getMessages();
+
 
 	}
 
@@ -72,11 +76,12 @@ class ChatContainer extends Component{
 
 
 	getMessages = async () => {
+		console.log('what', this.props.chatroom_id)
 		try {
-			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/chat/${localStorage.getItem('user')}`);
-
+			const response = await fetch(`${process.env.REACT_APP_API}/api/v1/users/chat/${this.props.chatroom_id}`);
+			console.log(response, 'wha')
 			const p = await response.json();
-
+			console.log('response? ', p, 'localStorage', localStorage.getItem('user'))
 			this.setState({
 				allMessages: p
 			});
@@ -133,7 +138,7 @@ class ChatContainer extends Component{
 
 
 	render() {
-		console.log('almessages', this.state.allMessages)
+		console.log('almessages', this.state.message)
 		return (
 
 			<div> 

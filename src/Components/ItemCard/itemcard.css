@@ -1,0 +1,16 @@
+.item-card {
+	position: fixed;
+	margin: 7%;
+	background: lightyellow;
+	border: solid 7px white;
+	border-radius: 15px; 
+	padding: 2.5%;
+}
+
+.items-image {
+	width: 75%;
+}
+
+.vbucks {
+	width: 10%;
+}
