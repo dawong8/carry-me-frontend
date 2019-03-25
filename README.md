@@ -14,6 +14,8 @@ Frontend:
 * React.js, Redux
 * React-router-dom
 
+3rd Party API: 
+* [Fortnite API](https://fortnitetracker.com/site-api)
 
 Technolgies implemented, but never used: 
 I encounted a problem with Redux, whenever I refreshed the app, Redux resets data that was stored. At first, I added Redux-Persist, but I decided to store information in local storage instead. 
